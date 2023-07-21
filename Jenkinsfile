@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('Run tests') {
+      steps {
+        sh 'gradle test'
+      }
+    }
+
   }
 }
