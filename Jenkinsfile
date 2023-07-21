@@ -14,6 +14,11 @@ pipeline {
             command:
             - cat
             tty: true
+          - name: busybox
+            image: busybox
+            command:
+            - cat
+            tty: true
         '''
       retries 2
     }
@@ -29,6 +34,9 @@ pipeline {
       steps {
         container('gradle'){
           sh 'gradle test'
+        }
+        container('busybox') {
+          sh '/bin/busybox'
         }
       }
     }
