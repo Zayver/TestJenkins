@@ -27,7 +27,9 @@ pipeline {
 
     stage('Run tests') {
       steps {
-        sh 'gradle test'
+        container('gradle'){
+          sh 'gradle test'
+        }
       }
     }
   }
