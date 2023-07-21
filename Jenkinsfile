@@ -6,11 +6,11 @@ pipeline {
         kind: Pod
         metadata:
           labels:
-            some-label: test-pod
+            some-label: some-label-value
         spec:
           containers:
-          - name: gradle
-            image: gradle:latest
+          - name: maven
+            image: maven:alpine
             command:
             - cat
             tty: true
@@ -24,16 +24,10 @@ pipeline {
     }
   }
   stages {
-    stage('Checkout code') {
+    stage('Run maven') {
       steps {
-        git(url: 'https://github.com/Zayver/TestJenkins', branch: 'master')
-      }
-    }
-
-    stage('Run tests') {
-      steps {
-        container('gradle'){
-          sh 'gradle test'
+        container('maven') {
+          sh 'mvn -version'
         }
         container('busybox') {
           sh '/bin/busybox'
