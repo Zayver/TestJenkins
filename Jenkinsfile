@@ -22,17 +22,23 @@ pipeline {
         '''
       retries 2
     }
+
   }
   stages {
-    stage('Run maven') {
+    stage('Code checkout') {
       steps {
-        container('maven') {
-          sh 'mvn -version'
-        }
-        container('busybox') {
-          sh '/bin/busybox'
-        }
+        git(url: 'https://github.com/Zayver/TestJenkins', branch: 'master')
       }
     }
+
+    stage('Run tests') {
+      steps {
+        container(name: 'gradle') {
+          sh 'gradle test'
+        }
+
+      }
+    }
+
   }
 }
