@@ -9,8 +9,8 @@ pipeline {
             some-label: some-label-value
         spec:
           containers:
-          - name: maven
-            image: maven:alpine
+          - name: gradle
+            image: gradle:latest
             command:
             - cat
             tty: true
