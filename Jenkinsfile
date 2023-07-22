@@ -14,8 +14,8 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: busybox
-            image: busybox
+          - name: docker
+            image: docker:latest
             command:
             - cat
             tty: true
@@ -40,8 +40,8 @@ pipeline {
     }
     stage('Build docker image'){
       steps{
-        script {
-          docker.build('zayver/testjenkins')
+        container(name:'docker'){
+          docker build . -t zayver/jenkinstest
         }
       }
     }
