@@ -40,7 +40,9 @@ pipeline {
     }
     stage('Build docker image'){
       steps{
-        sh 'docker build . -t zayver/testjenkins'
+        script {
+          docker.build('zayver/testjenkins')
+        }
       }
     }
 
