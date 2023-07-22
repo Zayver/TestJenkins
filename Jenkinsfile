@@ -41,7 +41,7 @@ pipeline {
     stage('Build docker image'){
       steps{
         container(name:'docker'){
-          docker build . -t zayver/jenkinstest
+          sh 'docker build . -t zayver/jenkinstest'
         }
       }
     }
