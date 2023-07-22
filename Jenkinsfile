@@ -14,11 +14,6 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: docker
-            image: docker:latest
-            command:
-            - cat
-            tty: true
         '''
       retries 2
     }
@@ -40,8 +35,8 @@ pipeline {
     }
     stage('Build docker image'){
       steps{
-        container(name:'docker'){
-          sh 'docker build . -t zayver/jenkinstest'
+        script{
+          def docker_image = docker.build('zayver/jenkinstest')
         }
       }
     }
